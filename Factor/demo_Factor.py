@@ -50,6 +50,7 @@ class Strategy(StrategyBase):
 
     # 收到第一根Bar后交易
     def on_bar(self, bar):
+        print bar.strtime
         print(bar.strendtime[:-6].replace('T', ' '))
         if self.is_traded:
             return
@@ -87,10 +88,21 @@ class Strategy(StrategyBase):
 
 if __name__ == '__main__':
     my_strategy = Strategy(
-        username='username', # 请修改账号
-        password='password', # 请修改密码
-        strategy_id='strategy_id', # 请修改策略ID
-        mode=3,
-        td_addr='localhost:8001')
+        username='18660821753', # 请修改账号
+        password='long199124', # 请修改密码
+        strategy_id='9f74b6f0-516e-11e7-a854-5254006af232', # 请修改策略ID
+        mode=4,
+        td_addr='106.75.147.38:7001')
+    my_strategy.backtest_config(
+                    start_time = '2014-10-25 09:30:00',
+                    end_time = '2015-10-25 09:30:00',
+                    initial_cash=1000000,
+                    transaction_ratio=1,
+                    commission_ratio=0,
+                    slippage_ratio=0,
+                    price_type=1,
+                    bench_symbol='SHSE.000300',
+                    check_cache=1)
+
     ret = my_strategy.run()
     print('exit code: ', ret)
